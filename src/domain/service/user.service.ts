@@ -1,7 +1,7 @@
-import { CreateUser } from '../interface/user'
+import { CreateUserBody } from '../model/body/create_user.body'
 import { User } from '../model/user'
 
 export abstract class UserService {
-  abstract create(payload: CreateUser): Promise<void>
+  abstract create(payload: CreateUserBody): Promise<void>
   abstract fetchAll(): Promise<User[]>
 }

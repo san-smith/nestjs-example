@@ -1,21 +1,23 @@
 import { Body, Controller, Get, Post } from '@nestjs/common'
-import { ApiTags } from '@nestjs/swagger'
-import { CreateUser } from 'src/domain/interface/user'
+import { ApiOkResponse, ApiTags } from '@nestjs/swagger'
+import { CreateUserBody } from 'src/domain/model/body/create_user.body'
+
 import { User } from 'src/domain/model/user'
 import { UserService } from 'src/domain/service/user.service'
 
-@ApiTags('user')
+@ApiTags('users')
 @Controller()
 export class UserController {
   constructor(private readonly userService: UserService) {}
 
   @Get('users')
+  @ApiOkResponse({ type: User, isArray: true })
   async fetchAllUsers(): Promise<User[]> {
     return this.userService.fetchAll()
   }
 
   @Post('users')
-  async create(@Body() payload: CreateUser) {
+  async create(@Body() payload: CreateUserBody) {
     await this.userService.create(payload)
   }
 }
