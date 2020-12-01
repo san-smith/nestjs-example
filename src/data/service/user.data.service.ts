@@ -22,4 +22,8 @@ export class UserDataService extends UserService {
   async fetchAll(): Promise<User[]> {
     return this.users
   }
+
+  findUserByToken(token: string): Promise<User> {
+    throw new Error('Method not implemented.')
+  }
 }
