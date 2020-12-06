@@ -1,5 +1,12 @@
 import { ApiModelProperty } from '@nestjs/swagger/dist/decorators/api-model-property.decorator'
-import { IsDefined, IsEmail, IsInt, Min, IsString } from 'class-validator'
+import {
+  IsDefined,
+  IsEmail,
+  IsInt,
+  Min,
+  IsString,
+  IsNotEmpty,
+} from 'class-validator'
 
 export class User {
   @IsInt()
@@ -7,6 +14,12 @@ export class User {
   @IsDefined()
   @ApiModelProperty({ type: 'integer' })
   id!: number
+
+  @IsDefined()
+  @IsString()
+  @IsNotEmpty()
+  @ApiModelProperty()
+  hash!: string
 
   @IsDefined()
   @IsEmail()

@@ -1,4 +1,6 @@
 import { Injectable } from '@nestjs/common'
+import * as bcrypt from 'bcrypt'
+import { Config } from 'src/config'
 import { CreateUserBody } from 'src/domain/model/body/create_user.body'
 import { User } from 'src/domain/model/user'
 import { UserService } from 'src/domain/service/user.service'
@@ -14,6 +16,7 @@ export class UserDataService extends UserService {
     user.email = payload.email
     user.firstName = ''
     user.lastName = ''
+    user.hash = await bcrypt.hash(payload.password, Config.salt)
 
     this.users.push(user)
     this.index++
@@ -23,7 +26,7 @@ export class UserDataService extends UserService {
     return this.users
   }
 
-  findUserByToken(token: string): Promise<User> {
-    throw new Error('Method not implemented.')
+  async findUserByEmail(email: string): Promise<User> {
+    return this.users.find((it) => it.email == email)
   }
 }

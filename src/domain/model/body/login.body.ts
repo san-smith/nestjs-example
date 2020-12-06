@@ -1,16 +1,16 @@
 import { ApiModelProperty } from '@nestjs/swagger/dist/decorators/api-model-property.decorator'
 import { IsDefined, IsEmail, IsNotEmpty, IsString } from 'class-validator'
 
-export class CreateUserBody {
+export class LoginBody {
   @IsDefined()
-  @IsEmail()
   @IsNotEmpty()
+  @IsEmail()
   @ApiModelProperty()
   email!: string
 
   @IsDefined()
-  @IsString()
   @IsNotEmpty()
+  @IsString()
   @ApiModelProperty()
   password!: string
 }

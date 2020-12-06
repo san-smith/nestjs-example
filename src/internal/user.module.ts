@@ -8,5 +8,6 @@ import as from 'src/utils/as'
   imports: [],
   controllers: [UserController],
   providers: [as(UserService, UserDataService)],
+  exports: [as(UserService, UserDataService)],
 })
 export class UserModule {}
